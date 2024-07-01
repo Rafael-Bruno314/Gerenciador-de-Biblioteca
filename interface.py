@@ -1,8 +1,8 @@
 import sys
-import gerenciar_livros
+from gerenciar_livros import *
 
-def interface(repeteco):
-    if(repeteco == 0):
+def interface(retorno):
+    if(retorno == 0):
         print("Bem vindo ao gerenciador de bibliotecas!")
 
         print("Cadastro de Livros")
@@ -19,48 +19,49 @@ def interface(repeteco):
         print("8 - Procurar livro por título, autor ou ISBN")
         print("9 - Filtrar livros por categoria ou disponibilidade")
         print("0 - Sair")
-        
+
         escolha_do_usuario = input("O que você deseja fazer?")
     else:
         escolha_do_usuario = input("O que mais você deseja fazer?")
 
     if(escolha_do_usuario == "1"):
-        gerenciar_livros.adicionar_livro()
+        Livros.adicionar_livro()
         interface(1)
 
     elif(escolha_do_usuario == "2"):
-        gerenciar_livros.excluir_livro()
+        Livros.excluir_livro()
         interface(1)
     
     elif(escolha_do_usuario == "3"):
-        gerenciar_livros.atualizar_livro()
+        Livros.atualizar_livro()
         interface(1)
     
     elif(escolha_do_usuario == "4"):
-        gerenciar_livros.exibir_livros()
+        exibir_livros()
         interface(1)
     
     elif(escolha_do_usuario == "5"):
-        gerenciar_livros.emprestar_livro()
+        Emprestimo.emprestar_livro()
         interface(1)
 
     elif(escolha_do_usuario == "6"):
-        gerenciar_livros.devolver_livro()
+        Emprestimo.devolver_livro()
         interface(1)
     
     elif(escolha_do_usuario == "7"):
-        gerenciar_livros.listar_emprestimos()
+        listar_emprestimos()
         interface(1)
 
     elif(escolha_do_usuario == "8"):
-        gerenciar_livros.procurar_livros()
+        Emprestimo.procurar_livros()
         interface(1)
 
     elif(escolha_do_usuario == "9"):
-        gerenciar_livros.listar_disponibilidade()
+        Emprestimo.listar_disponibilidade()
         interface(1)
 
     elif(escolha_do_usuario == "0"):
+        print("Saindo do programa...")
         sys.exit()
 
     else:
