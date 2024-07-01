@@ -1,5 +1,4 @@
-import time
-import livros_e_usuarios_disponíveis
+from livros_e_usuarios_disponíveis import *
 from gerenciar_usuarios import Usuarios
 
 class Visualizar():
@@ -8,25 +7,25 @@ class Visualizar():
         print("-"*50)
         print("Listando os livros cadastrados na base de dados:")
         print("-"*50)
-        for indice, livro in enumerate(livros_e_usuarios_disponíveis.livros, start=1):
+        for indice, livro in enumerate(livros_db(), start=1):
             print(f"{indice} - Título: {livro['nome']} \n Autor: {livro['autor']} - ISBN: {livro['isbn']}\n")
 
     def listar_emprestimos():
         print("-"*50)
         print("Listando todos os livros com empréstimo:")
         print("-"*50)
-        for indice, livro in enumerate(livros_e_usuarios_disponíveis.livros, start=1):
+        for indice, livro in enumerate(livros_db(), start=1):
             if(livro.get("Emprestado por") != None):
                 print(f"{indice} - Título: {livro['nome']} \n Autor: {livro['autor']} - ISBN: {livro['isbn']}\n Emprestado para: {livro['Emprestado por']}\n")
 
     def listar_disponibilidade():
-        for indice, linha in enumerate(livros_e_usuarios_disponíveis.livros, start=1):
+        for indice, linha in enumerate(livros_db(), start=1):
             if(linha.get("Emprestado por") == None):
                 print(f"{indice} - Título: {linha['nome']} \n Autor: {linha['autor']} - ISBN: {linha['isbn']}\n")
 
     def procurar_livros(info):
         resultado = []
-        for indice, livro in enumerate(livros_e_usuarios_disponíveis.livros):
+        for indice, livro in enumerate(livros_db()[0]):
             for chave, valor in livro.items():
                 if(info == valor):
                     resultado.append(indice)
@@ -34,7 +33,7 @@ class Visualizar():
     
     def buscar_livros(info):
         resultados = []
-        for livro in livros_e_usuarios_disponíveis.livros:
+        for livro in livros_db():
             for chave, valor in livro.items():
                 if(info == valor):
                     resultados.append(livro)
@@ -47,26 +46,23 @@ class Livros():
 
     def adicionar_livro(titulo, autor, isbn):
         print("Adicionando novo livro")
-        livros_e_usuarios_disponíveis.livros.append({"nome": titulo, "autor": autor, "isbn": isbn})
-        time.sleep(1)
+        livro = {"nome": titulo, "autor": autor, "isbn": isbn}
+        cadastra_livro_db(livro)
         print(f"Livro '{titulo}' de {autor} com ISBN {isbn} adicionado com sucesso.")
-        time.sleep(3)
 
     def atualizar_livro(info):
-        time.sleep(0.5)
         indice = Visualizar.procurar_livros(info)[0]
         print("Qual dado deseja atualizar? ", end=" ")
         dado = input()
         print("Qual o novo valor? ", end=" ")
         valor = input()   
-        livros_e_usuarios_disponíveis.livros[indice][dado] = valor
-        print(f" Livro atualizado com sucesso para {livros_e_usuarios_disponíveis.livros[indice][dado]}")
+        livros_db()[0][indice][dado] = valor
+        print(f" Livro atualizado com sucesso para {livros_db()[0][indice][dado]}")
 
     def excluir_livro(info):
         indice = Visualizar.procurar_livros(info)[0]
-        livros_e_usuarios_disponíveis.livros.pop(indice)
+        livros_db()[0].pop(indice)
         print("Removendo livro...")
-        time.sleep(2)
 
 
 class Biblioteca:
@@ -80,12 +76,12 @@ class Biblioteca:
             indice = int(info, base=10)-1
         else:
             indice = Visualizar.procurar_livros(info)[0]       
-        livros_e_usuarios_disponíveis.livros[indice]["Emprestado por"] = usuario
-        print(f"Livro {livros_e_usuarios_disponíveis.livros[indice]['nome']} emprestado para {usuario}")
+        livros_db()[0][indice]["Emprestado por"] = usuario
+        print(f"Livro {livros_db()[0][indice]['nome']} emprestado para {usuario}")
 
     def devolver_livro():
         Visualizar.listar_emprestimos()
         print("Qual livro deseja devolver (Digite o índice)?")
         indice = int(input())
-        del livros_e_usuarios_disponíveis.livros[indice]["Emprestado por"]
-        print(f"O livro {livros_e_usuarios_disponíveis.livros[indice]['nome']} de {livros_e_usuarios_disponíveis.livros[indice]['autor']} foi devolvido com sucesso!")
+        del livros_db()[0][indice]["Emprestado por"]
+        print(f"O livro {livros_db()[0][indice]['nome']} de {livros_db()[0][indice]['autor']} foi devolvido com sucesso!")

@@ -1,3 +1,6 @@
+import json
+
+
 livros = [
     {
         "nome": "Dom Quixote",
@@ -52,6 +55,27 @@ livros = [
         "isbn": "9780345339706"
     }
 ]
+
+
+def livros_db():
+    livros = []
+    with open("livros.txt", "r", encoding='utf-8') as arquivo:
+        for linha in arquivo:
+            livros.append(json.loads(linha.strip()))
+    print(livros)
+    return livros
+
+def cadastra_livro_db(livro):
+    with open("livros.txt", "r", encoding='utf-8',errors='replace') as arquivo:
+        banana = arquivo.read()
+        #print("-"*100,banana[:-1])
+    with open("livros.txt", "w", encoding='utf-8',errors='replace') as write_arquivo:
+        write_arquivo.write(banana[:-1]+ "," + json.dumps(livro, ensure_ascii=False) + "]")
+
+
+
+#cadastra_livro_db()
+#livros_db()
 
 usuarios = [
     "Taylor",
