@@ -1,5 +1,7 @@
 import sys
+import time
 from gerenciar_livros import *
+from gerenciar_usuarios import Usuarios
 
 def interface(retorno):
     if(retorno == 0):
@@ -7,8 +9,8 @@ def interface(retorno):
 
         print("Cadastro de Livros")
         print("1 - Adicionar novo livro")
-        print("2 - Remover livro existente")
-        print("3 - Atualizar informações de um livro")
+        print("2 - Atualizar informações de um livro")
+        print("3 - Remover livro existente")
         print("4 - Listar todos os livros disponíveis")
         print("-"*60)
         print("5 - Registrar o empréstimo de um livro")
@@ -17,7 +19,7 @@ def interface(retorno):
         print("-"*60)
         print("Consulta de Livros")
         print("8 - Procurar livro por título, autor ou ISBN")
-        print("9 - Filtrar livros por categoria ou disponibilidade")
+        print("9 - Ver todos os livros disponíveis para empréstimo")
         print("0 - Sair")
 
         escolha_do_usuario = input("O que você deseja fazer?")
@@ -25,43 +27,59 @@ def interface(retorno):
         escolha_do_usuario = input("O que mais você deseja fazer?")
 
     if(escolha_do_usuario == "1"):
-        Livros.adicionar_livro()
+        titulo = input("Qual o nome do livro?")
+        autor = input("Qual o autor do livro?")
+        isbn = input("Qual o ISBN do livro?")
+        Livros.adicionar_livro(titulo, autor, isbn)
         interface(1)
 
     elif(escolha_do_usuario == "2"):
-        Livros.excluir_livro()
-        interface(1)
-    
+        info = input("Qual livro deseja atualizar?")
+        Livros.atualizar_livro(info)
+        interface(1) 
+
     elif(escolha_do_usuario == "3"):
-        Livros.atualizar_livro()
+        info = input("Qual livro deseja Remover?")
+        Livros.excluir_livro(info)
         interface(1)
     
     elif(escolha_do_usuario == "4"):
-        exibir_livros()
+        Visualizar.exibir_livros()
         interface(1)
     
     elif(escolha_do_usuario == "5"):
-        Emprestimo.emprestar_livro()
+        print("possui cadastro? (s/n)", end=" ")
+        cadastro = input()
+        while cadastro != "s" or cadastro != "n":
+            if(cadastro == "n"):
+                Biblioteca.emprestar_livro(Usuarios.adicionar_usuarios())
+                break
+            else:
+                usuario = input("Digite seu nome de usuário:")
+                Biblioteca.emprestar_livro(Usuarios.pesquisar_usuario(usuario))
+                break
         interface(1)
 
     elif(escolha_do_usuario == "6"):
-        Emprestimo.devolver_livro()
+        Biblioteca.devolver_livro()
         interface(1)
     
     elif(escolha_do_usuario == "7"):
-        listar_emprestimos()
+        Visualizar.listar_emprestimos()
         interface(1)
 
     elif(escolha_do_usuario == "8"):
-        Emprestimo.procurar_livros()
+        info = input("Digite alguma informação do livro desejado:")
+        Visualizar.buscar_livros(info)
         interface(1)
 
     elif(escolha_do_usuario == "9"):
-        Emprestimo.listar_disponibilidade()
+        Visualizar.listar_disponibilidade()
         interface(1)
 
     elif(escolha_do_usuario == "0"):
         print("Saindo do programa...")
+        time.sleep(3)
         sys.exit()
 
     else:
