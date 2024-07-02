@@ -24,12 +24,12 @@ class Visualizar():
                 print(f"{indice} - Título: {linha['nome']} \n Autor: {linha['autor']} - ISBN: {linha['isbn']}\n")
 
     def procurar_livros(info):
-        resultado = []
-        for indice, livro in enumerate(livros_db()[0]):
+        indice = []
+        for key, livro in enumerate(livros_db()):
             for chave, valor in livro.items():
                 if(info == valor):
-                    resultado.append(indice)
-        return resultado
+                    indice.append(key)
+        return indice[0]
     
     def buscar_livros(info):
         resultados = []
@@ -56,13 +56,14 @@ class Livros():
         dado = input()
         print("Qual o novo valor? ", end=" ")
         valor = input()   
-        livros_db()[0][indice][dado] = valor
+        livros_db()[indice][dado] = valor
         print(f" Livro atualizado com sucesso para {livros_db()[0][indice][dado]}")
 
     def excluir_livro(info):
-        indice = Visualizar.procurar_livros(info)[0]
-        livros_db()[0].pop(indice)
+        indice = Visualizar.procurar_livros(info)
+        nova_lista = livros_db().pop(indice)
         print("Removendo livro...")
+        print(nova_lista)
 
 
 class Biblioteca:
