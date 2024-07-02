@@ -62,8 +62,8 @@ def livros_db():
     with open("livros.txt", "r", encoding='utf-8') as arquivo:
         for linha in arquivo:
             livros.append(json.loads(linha.strip()))
-    print(livros)
-    return livros
+    print(livros[0])
+    return livros[0]
 
 def cadastra_livro_db(livro):
     with open("livros.txt", "r", encoding='utf-8',errors='replace') as arquivo:
