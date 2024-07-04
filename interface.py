@@ -5,18 +5,20 @@ from gerenciar_usuarios import Usuarios
 
 def interface(retorno):
     if(retorno == 0):
+        print("-"*50)
         print("Bem vindo ao gerenciador de bibliotecas!")
-
+        print("-"*50)
+        
         print("Cadastro de Livros")
         print("1 - Adicionar novo livro")
         print("2 - Remover livro existente")
         print("3 - Atualizar informações de um livro")
         print("4 - Listar todos os livros disponíveis")
-        print("-"*60)
+        print("-"*50)
         print("5 - Registrar o empréstimo de um livro")
         print("6 - Registrar a devolução de um livro")
         print("7 - Listar todos os empréstimos ativos")
-        print("-"*60)
+        print("-"*50)
         print("Consulta de Livros")
         print("8 - Procurar livro por título, autor ou ISBN")
         print("9 - Ver todos os livros disponíveis para empréstimo")

@@ -1,12 +1,12 @@
-import livros_e_usuarios_disponíveis
+import intermedio_db
 
 class Usuarios:
 
-    def adicionar_usuarios():
+    def adicionar_usuarios() -> str:
         print("Qual seu nome? ", end=" ")
         nome = input()
-        livros_e_usuarios_disponíveis.usuarios.append(nome)
-        usuario = livros_e_usuarios_disponíveis.usuarios[-1]
+        intermedio_db.usuarios.append(nome)
+        usuario = intermedio_db.usuarios[-1]
         print(f"Usuário {usuario} adicionado com sucesso!")
         return usuario
     
@@ -14,12 +14,12 @@ class Usuarios:
         print("-"*30)
         print("usuários cadastrados:")
         print("-"*30)
-        for indice, usuario in enumerate(livros_e_usuarios_disponíveis.usuarios, start=1):
+        for indice, usuario in enumerate(intermedio_db.usuarios, start=1):
             print(f"{indice} - {usuario}\n")
 
     def pesquisar_usuario(user):
         temp_user = ""
-        for indice, usuario in enumerate(livros_e_usuarios_disponíveis.usuarios):
+        for indice, usuario in enumerate(intermedio_db.usuarios):
             if(usuario == user):
                 temp_user = usuario
         if temp_user == "":
