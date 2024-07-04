@@ -54,7 +54,9 @@ def interface(retorno):
         cadastro = input()
         while cadastro != "s" or cadastro != "n":
             if(cadastro == "n"):
-                Biblioteca.emprestar_livro(Usuarios.adicionar_usuarios())
+                print("Qual seu nome? ", end=" ")
+                nome = input()
+                Biblioteca.emprestar_livro(Usuarios.adicionar_usuarios(nome))
                 break
             else:
                 usuario = input("Digite seu nome de usuário:")

@@ -18,17 +18,3 @@ def cadastra_livro_db(livro:str):
 def atualiza_livro(novo_db:list):
     with open("livros.txt", "w", encoding='utf-8') as write_arquivo:
         write_arquivo.write(json.dumps(novo_db, ensure_ascii=False))
-
-
-usuarios = [
-    "Taylor",
-    "Bruno",
-    "Carlos",
-    "Maria Clara",
-    "Eduardo",
-    "Fernanda",
-    "Gabriel",
-    "Helena",
-    "Igor",
-    "Juliana"
-]
