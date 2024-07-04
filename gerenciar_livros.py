@@ -50,7 +50,7 @@ class Livros():
     def adicionar_livro(titulo, autor, isbn):
         print("Adicionando novo livro")
         livro = json.dumps({"nome": titulo, "autor": autor, "isbn": isbn}, ensure_ascii=False)
-        cadastra_livro_db(livro)
+        cadastra_db(livro,"livros.txt")
         print(f"Livro '{titulo}' de {autor} com ISBN {isbn} adicionado com sucesso.")
 
     def atualizar_livro(info:str):

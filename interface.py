@@ -56,7 +56,7 @@ def interface(retorno):
             if(cadastro == "n"):
                 print("Qual seu nome? ", end=" ")
                 nome = input()
-                Biblioteca.emprestar_livro(Usuarios.adicionar_usuarios(nome))
+                Biblioteca.emprestar_livro(cadastra_db(nome,"usuarios.txt"))
                 break
             else:
                 usuario = input("Digite seu nome de usuário:")
