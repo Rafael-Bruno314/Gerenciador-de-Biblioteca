@@ -25,12 +25,36 @@ class Visualizar():
 
     def procurar_livros(info):
         indice = []
-        for key, livro in enumerate(livros_db()):
-            for chave, valor in livro.items():
+        #print(type(livros_db()))
+        #print(len(livros_db()))
+        str_db = str(livros_db())
+        print(type(str_db))
+        db_split = str_db.split('},')
+        db_final = []
+        for item in db_split:
+            item = item + '}'
+            db_final.append(item)
+        #print(db_final, type(db_final))
+        for key, livro in enumerate(db_final):
+            print(livro)
+            pass
+        
+
+
+
+        """
+        for key, livro in enumerate(livros_db()[0]):
+            novo_livro = eval(livro)
+            print(novo_livro,type(novo_livro))
+            print("aaaaaaaaaa",type(livro))
+            i+=1
+            print(livro, i)
+            for chave, valor in novo_livro.items():
                 if(info == valor):
                     indice.append(key)
         return indice[0]
-    
+        """
+
     def buscar_livros(info):
         resultados = []
         for livro in livros_db():
@@ -46,7 +70,7 @@ class Livros():
 
     def adicionar_livro(titulo, autor, isbn):
         print("Adicionando novo livro")
-        livro = {"nome": titulo, "autor": autor, "isbn": isbn}
+        livro = json.dumps({"nome": titulo, "autor": autor, "isbn": isbn}, ensure_ascii=False)
         cadastra_livro_db(livro)
         print(f"Livro '{titulo}' de {autor} com ISBN {isbn} adicionado com sucesso.")
 
@@ -61,9 +85,10 @@ class Livros():
 
     def excluir_livro(info):
         indice = Visualizar.procurar_livros(info)
-        nova_lista = livros_db().pop(indice)
+        nova_lista = livros_db()
+        nova_lista.pop(indice)
         print("Removendo livro...")
-        print(nova_lista)
+        exclui_livro(nova_lista)
 
 
 class Biblioteca:

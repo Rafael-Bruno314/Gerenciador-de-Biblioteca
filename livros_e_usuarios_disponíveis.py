@@ -1,6 +1,5 @@
 import json
 
-
 livros = [
     {
         "nome": "Dom Quixote",
@@ -56,26 +55,31 @@ livros = [
     }
 ]
 
-
 def livros_db():
-    livros = []
     with open("livros.txt", "r", encoding='utf-8') as arquivo:
-        for linha in arquivo:
-            livros.append(json.loads(linha.strip()))
-    print(livros[0])
-    return livros[0]
+        conteudo = arquivo.read()
+        lista_de_livros = json.loads(conteudo)
+        
+        #for livro in lista_de_livros:
+            #print(livro, type(livro))
+    return lista_de_livros
+
 
 def cadastra_livro_db(livro):
-    with open("livros.txt", "r", encoding='utf-8',errors='replace') as arquivo:
-        banana = arquivo.read()
-        #print("-"*100,banana[:-1])
-    with open("livros.txt", "w", encoding='utf-8',errors='replace') as write_arquivo:
-        write_arquivo.write(banana[:-1]+ "," + json.dumps(livro, ensure_ascii=False) + "]")
+    #print(livro, type(livro))
+    with open("livros.txt", "r", encoding='utf-8',errors='ignore') as arquivo:
+        db_antes = arquivo.read()
+        db_antes = db_antes[:-1]
+    with open("livros.txt", "w", encoding='utf-8',errors='ignore') as write_arquivo:
+        write_arquivo.write(db_antes + "," + livro + "]")
 
 
+def exclui_livro(novo_db):
+    with open("livros.txt", "w", encoding='utf-8') as write_arquivo:
+        write_arquivo.write(str(novo_db))
 
-#cadastra_livro_db()
-#livros_db()
+#livro = json.dumps({"nome": "título", "autor": "autór", "isbn": "ísbn"}, ensure_ascii=False)
+#cadastra_livro_db(livro)
 
 usuarios = [
     "Taylor",

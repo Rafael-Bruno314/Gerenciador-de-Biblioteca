@@ -9,8 +9,8 @@ def interface(retorno):
 
         print("Cadastro de Livros")
         print("1 - Adicionar novo livro")
-        print("2 - Atualizar informações de um livro")
-        print("3 - Remover livro existente")
+        print("2 - Remover livro existente")
+        print("3 - Atualizar informações de um livro")
         print("4 - Listar todos os livros disponíveis")
         print("-"*60)
         print("5 - Registrar o empréstimo de um livro")
@@ -34,14 +34,14 @@ def interface(retorno):
         interface(1)
 
     elif(escolha_do_usuario == "2"):
-        info = input("Qual livro deseja atualizar?")
-        Livros.atualizar_livro(info)
-        interface(1) 
-
-    elif(escolha_do_usuario == "3"):
         info = input("Qual livro deseja Remover?")
         Livros.excluir_livro(info)
         interface(1)
+
+    elif(escolha_do_usuario == "3"):
+        info = input("Qual livro deseja atualizar?")
+        Livros.atualizar_livro(info)
+        interface(1) 
     
     elif(escolha_do_usuario == "4"):
         Visualizar.exibir_livros()
